@@ -1,3 +1,25 @@
+function openPDFPopup(pdfUrl) {
+  // Open the PDF in a pop-up window
+  var popupWindow = window.open("", "_blank", "width=400,height=400");
+  popupWindow.document.write("<embed width='100%' height='100%' type='application/pdf' src='" + pdfUrl + "' />");
+
+  // Function to center the popup window
+  function centerPopup() {
+      // Calculate the center position for the popup window
+      var centerX = (window.screen.width - popupWindow.outerWidth) / 2;
+      var centerY = (window.screen.height - popupWindow.outerHeight) / 2;
+      // Move the popup window to the center position
+      popupWindow.moveTo(centerX, centerY);
+  }
+
+
+}
+
+
+
+
+
+
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 
@@ -27,7 +49,7 @@ window.onscroll = () =>{
         }
 
         else{
-            sec.classList.remove('show-animate');
+          sec.classList.remove('show-animate');
         }
 
     });
@@ -37,10 +59,13 @@ window.onscroll = () =>{
 
     menuIcon.classList.remove('bx-x');
     navbar.classList.remove('active');
+    
+    let footer = documnet.querySelector("footer");
+    footer.classList.toggle("show-animate", this.innerHeight + this.screenY >= document.scrollingElement.scrollHeight);
 }
 
 
-const form = document.querySelector(".contact form"); // Corrected selector
+const form = document.querySelector(".contact form"); 
 const fullName = document.getElementById("name");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone"); 
@@ -76,6 +101,8 @@ function sendEmail() {
           text: "Message sent successfully!",
           icon: "success"
         });
+        // Reset the form
+        form.reset();
       } else {
         console.log("Email not sent:", message);
       }
@@ -89,6 +116,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   sendEmail();
 });
+
 
 
 
